@@ -50,4 +50,8 @@ ENV PATH ${ROCM_PATH}/bin:${HCC_HOME}/bin:${HSA_PATH}/bin:${HIP_PATH}/bin:${PATH
 
 COPY tests/ tests/
 
+# Adding Pannotia
+RUN cd /
+RUN git clone https://github.com/darchr/pannotia.git
+
 CMD bash
