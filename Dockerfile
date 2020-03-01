@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
 
 # Get files needed for gem5, apply patches, build
 RUN git clone --single-branch --branch agutierr/master-gcn3-staging https://gem5.googlesource.com/amd/gem5
+RUN git -C /gem5/ fetch "https://gem5.googlesource.com/amd/gem5" refs/changes/83/22983/3 && git -C /gem5/ cherry-pick FETCH_HEAD --no-commit
 COPY gem5.patch .
 RUN git -C /gem5/ checkout d0945dc2 && git apply gem5.patch --directory=gem5
 RUN chmod 777 /gem5
