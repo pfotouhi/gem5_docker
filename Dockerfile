@@ -34,6 +34,8 @@ RUN wget -qO- repo.radeon.com/rocm/archive/apt_${rocm_ver}.tar.bz2 \
     && dpkg -i h/hsa-ext-rocr-dev/* \
     && dpkg -i h/hsa-rocr-dev/* \
     && dpkg -i r/rocm-utils/* \
+    && dpkg -i r/rocm-opencl/* \
+    && dpkg -i r/rocm-opencl-dev/* \
     && dpkg -i h/hcc/* \
     && dpkg -i h/hip_base/* \
     && dpkg -i h/hip_hcc/* \
