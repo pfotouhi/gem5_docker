@@ -1,0 +1,41 @@
+diff --git a/configs/example/apu_se.py b/configs/example/apu_se.py
+index 1fb1bce..3629bcb 100644
+--- a/configs/example/apu_se.py
++++ b/configs/example/apu_se.py
+@@ -459,18 +459,16 @@ if options.env:
+         env = [line.rstrip() for line in f]
+ else:
+     env = ['LD_LIBRARY_PATH=%s' % ':'.join([
+-               os.getenv('ROCM_PATH','/opt/rocm')+'/lib',
+-               os.getenv('HCC_HOME','/opt/rocm/hcc')+'/lib',
+-               os.getenv('HSA_PATH','/opt/rocm/hsa')+'/lib',
+-               os.getenv('HIP_PATH','/opt/rocm/hip')+'/lib',
+-               os.getenv('ROCM_PATH','/opt/rocm')+'/libhsakmt/lib',
+-               os.getenv('ROCM_PATH','/opt/rocm')+'/miopen/lib',
+-               os.getenv('ROCM_PATH','/opt/rocm')+'/miopengemm/lib',
+-               os.getenv('ROCM_PATH','/opt/rocm')+'/hipblas/lib',
+-               os.getenv('ROCM_PATH','/opt/rocm')+'/rocblas/lib',
+-               "/usr/lib/x86_64-linux-gnu"
++                "/opt/rocm/lib",
++                "/opt/rocm/hcc/lib",
++                "/opt/rocm/hsa/lib",
++                "/opt/rocm/hip/lib",
++                "/opt/rocm/libhsakmt/lib",
++                "/opt/rocm/opencl/include",
++                "/opt/rocm/opencl/lib/x86",
++                "/usr/lib/x86_64-linux-gnu"
+            ]),
+-           'HOME=%s' % os.getenv('HOME','/'),
++           'HOME=%s' % os.getcwd(),
+            "HSA_ENABLE_INTERRUPT=1"]
+ 
+ process = Process(executable = executable, cmd = [options.cmd]
+@@ -630,7 +628,7 @@ redirect_paths = [RedirectPath(src = "/proc",
+                                dests = ["%s/fs/tmp"  % m5.options.outdir]),
+                   RedirectPath(src = "/dev/shm",
+                                dests = ["/dev/shm/%s/gem5_%s"  %
+-                                   (getpass.getuser(), os.getpid())])]
++                                   (str(os.getuid()), os.getpid())])]
+ 
+ system.redirect_paths = redirect_paths
+ 
